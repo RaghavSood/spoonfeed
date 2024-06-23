@@ -42,7 +42,6 @@ func (f *FeedGenerator) Generate() (Feed, error) {
 func (f *FeedGenerator) generateRSS2() (Feed, error) {
 	rssFeed := rss2.RssFeedTop{
 		Version: "2.0",
-		Content: "http://purl.org/rss/1.0/modules/content/",
 	}
 
 	marshalledFeed, err := xml.Marshal(rssFeed)
