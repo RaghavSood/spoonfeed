@@ -3,6 +3,8 @@ package web
 import (
 	"net/http"
 	"os"
+
+	"github.com/RaghavSood/spoonfeed/feedgen"
 )
 
 type Server struct{}
@@ -26,7 +28,15 @@ func (s *Server) Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) RSS(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("RSS Feed"))
+	feedGen := feedgen.NewFeedGenerator(feedgen.RSS2)
+	feed, err := feedGen.Generate()
+	if err != nil {
+		w.Write([]byte("Error generating feed"))
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/rss+xml")
+	w.Write(feed.EncodedContent)
 }
 
 func (s *Server) RSSBucket(w http.ResponseWriter, r *http.Request) {
