@@ -1,6 +1,7 @@
 package web
 
 import (
+	"log"
 	"net/http"
 	"os"
 
@@ -20,7 +21,11 @@ func (s *Server) Serve() {
 	router.HandleFunc("GET /rss2/{bucket}", s.RSSBucket)
 
 	port := os.Getenv("SPOONFEED_PORT")
-	http.ListenAndServe(":"+port, router)
+	log.Println("Starting server on port", port)
+	err := http.ListenAndServe(":"+port, router)
+	if err != nil {
+		log.Println("Error starting server:", err)
+	}
 }
 
 func (s *Server) Index(w http.ResponseWriter, r *http.Request) {
