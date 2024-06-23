@@ -1,9 +1,8 @@
 package web
 
 import (
+	"net/http"
 	"os"
-
-	"github.com/gin-gonic/gin"
 )
 
 type Server struct{}
@@ -13,16 +12,23 @@ func NewServer() *Server {
 }
 
 func (s *Server) Serve() {
-	gin.SetMode(gin.ReleaseMode)
-	r := gin.Default()
-	r.GET("/", s.Index)
+	router := http.NewServeMux()
+	router.HandleFunc("GET /", s.Index)
+	router.HandleFunc("GET /rss2", s.RSS)
+	router.HandleFunc("GET /rss2/{bucket}", s.RSSBucket)
 
 	port := os.Getenv("SPOONFEED_PORT")
-	r.Run(":" + port)
+	http.ListenAndServe(":"+port, router)
 }
 
-func (s *Server) Index(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "Hello, World!",
-	})
+func (s *Server) Index(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hello, World!"))
+}
+
+func (s *Server) RSS(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("RSS Feed"))
+}
+
+func (s *Server) RSSBucket(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("RSS Feed for bucket"))
 }
