@@ -53,7 +53,7 @@
               name = "spoonfeed";
 
               src = ./.;
-              vendorHash = "";
+              vendorHash = null;
 
               buildInputs = with pkgs; [
                 go
@@ -63,13 +63,7 @@
 
               subPackages = [ "cmd/spoonfeed" ];
 
-              preBuild = ''
-                substituteInPlace main.go --replace-fail tailwindcss ${pkgs.tailwindcss}/bin/tailwindcss
-                go generate main.go
-              '';
-
               doCheck = false;
-
             };
           });
     };
