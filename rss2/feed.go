@@ -18,9 +18,21 @@ type RssChannel struct {
 
 	// Optional fields
 	Categories []Category `xml:"category,omitempty"`
+	Cloud      Cloud      `xml:"cloud,omitempty"`
+	Copyright  string     `xml:"copyright,omitempty"`
+	Docs       string     `xml:"docs,omitempty"`
+	Generator  string     `xml:"generator,omitempty"`
 }
 
 type Category struct {
 	Domain string `xml:"domain,attr,omitempty"`
 	Value  string `xml:",chardata"`
+}
+
+type Cloud struct {
+	Domain   string `xml:"domain,attr"`
+	Port     int    `xml:"port,attr"`
+	Path     string `xml:"path,attr"`
+	Register string `xml:"registerProcedure,attr"`
+	Protocol string `xml:"protocol,attr"`
 }

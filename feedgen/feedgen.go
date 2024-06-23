@@ -55,6 +55,16 @@ func (f *FeedGenerator) generateRSS2() (Feed, error) {
 					Domain: "spoonfeed",
 				},
 			},
+			Cloud: rss2.Cloud{
+				Domain:   "spoonfeed.dev",
+				Port:     80,
+				Path:     "/rss2",
+				Protocol: "xml-rpc",
+				Register: "spoonfeed.notify",
+			},
+			Copyright: "© 2024 Spoonfeed",
+			Docs:      "https://www.rssboard.org/rss-specification",
+			Generator: "Spoonfeed RSS2 Generator",
 		},
 	}
 
