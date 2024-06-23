@@ -30,7 +30,6 @@
                   };
 
                   packages = with pkgs; [
-                    goose
                     flyctl
                     air
                     tailwindcss
@@ -54,12 +53,6 @@
 
               src = ./.;
               vendorHash = null;
-
-              buildInputs = with pkgs; [
-                go
-                tailwindcss
-                git
-              ];
 
               subPackages = [ "cmd/spoonfeed" ];
 
