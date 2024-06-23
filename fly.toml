@@ -4,7 +4,7 @@
 #
 
 app = 'spoonfeed'
-primary_region = 'sin'
+primary_region = 'cdg'
 
 [build]
 
