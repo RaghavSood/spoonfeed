@@ -42,6 +42,11 @@ func (f *FeedGenerator) Generate() (Feed, error) {
 func (f *FeedGenerator) generateRSS2() (Feed, error) {
 	rssFeed := rss2.RssFeedTop{
 		Version: "2.0",
+		Channel: rss2.RssChannel{
+			Title:       "RSS2 Feed",
+			Link:        "https://spoonfeed.dev",
+			Description: "RSS2 Feed for Spoonfeed",
+		},
 	}
 
 	marshalledFeed, err := xml.Marshal(rssFeed)
