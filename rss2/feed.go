@@ -11,7 +11,16 @@ type RssFeedTop struct {
 }
 
 type RssChannel struct {
+	// Required fields
 	Title       string `xml:"title"`
 	Link        string `xml:"link"`
 	Description string `xml:"description"`
+
+	// Optional fields
+	Categories []Category `xml:"category,omitempty"`
+}
+
+type Category struct {
+	Domain string `xml:"domain,attr,omitempty"`
+	Value  string `xml:",chardata"`
 }

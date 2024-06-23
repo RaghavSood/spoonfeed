@@ -46,6 +46,15 @@ func (f *FeedGenerator) generateRSS2() (Feed, error) {
 			Title:       "RSS2 Feed",
 			Link:        "https://spoonfeed.dev",
 			Description: "RSS2 Feed for Spoonfeed",
+			Categories: []rss2.Category{
+				rss2.Category{
+					Value: "Technology",
+				},
+				rss2.Category{
+					Value:  "Programming",
+					Domain: "spoonfeed",
+				},
+			},
 		},
 	}
 
